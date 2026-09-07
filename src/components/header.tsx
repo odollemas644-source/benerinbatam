@@ -7,6 +7,7 @@ import { BRAND, getWhatsAppLink } from "@/lib/constants";
 
 const navLinks = [
   { href: "/service-ac", label: "Service AC" },
+  { href: "/blog", label: "Blog" },
   { href: "/booking", label: "Booking" },
 ];
 
