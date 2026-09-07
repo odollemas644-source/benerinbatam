@@ -23,10 +23,10 @@ export default function Footer() {
             <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-white">Layanan</h4>
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/service-ac" className="transition hover:text-white">Service AC</Link></li>
-              <li><Link href="/service-elektronik" className="transition hover:text-white">Service Elektronik</Link></li>
-              <li><Link href="/cleaning-service" className="transition hover:text-white">Cleaning Service</Link></li>
-              <li><Link href="/jasa-listrik" className="transition hover:text-white">Jasa Listrik</Link></li>
-              <li><Link href="/plumbing" className="transition hover:text-white">Plumbing</Link></li>
+              <li><Link href="/booking?category=elektronik" className="transition hover:text-white">Service Elektronik</Link></li>
+              <li><Link href="/booking?category=cleaning" className="transition hover:text-white">Cleaning Service</Link></li>
+              <li><Link href="/booking?category=listrik" className="transition hover:text-white">Jasa Listrik</Link></li>
+              <li><Link href="/booking?category=plumbing" className="transition hover:text-white">Plumbing</Link></li>
             </ul>
           </div>
 
