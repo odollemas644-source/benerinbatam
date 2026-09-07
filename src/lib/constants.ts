@@ -1,8 +1,8 @@
 export const BRAND = {
   name: "Benerin",
   tagline: "Tinggal panggil, beres.",
-  phone: "6281234567890", // ganti dengan nomor WA bisnis
-  whatsappUrl: "https://wa.me/6281234567890",
+  phone: "6288901477760", // ganti dengan nomor WA bisnis
+  whatsappUrl: "https://wa.me/6288901477760",
   instagram: "@benerin.btm",
   tiktok: "@benerin.btm",
 };
