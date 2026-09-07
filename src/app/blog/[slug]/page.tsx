@@ -7,91 +7,62 @@ import Footer from "@/components/footer";
 import WaFloat from "@/components/wa-float";
 import { ARTICLES } from "@/lib/articles";
 import { ARTICLE_CONTENT } from "@/lib/article-content";
-import { BRAND, getWhatsAppLink } from "@/lib/constants";
+import { getWhatsAppLink } from "@/lib/constants";
+
+type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
   return ARTICLES.map((article) => ({ slug: article.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const article = ARTICLES.find((a) => a.slug === params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const article = ARTICLES.find((a) => a.slug === slug);
   if (!article) return {};
   return {
     title: article.title,
     description: article.description,
     keywords: article.keywords,
-    openGraph: {
-      title: article.title,
-      description: article.description,
-      type: "article",
-      locale: "id_ID",
-    },
+    openGraph: { title: article.title, description: article.description, type: "article", locale: "id_ID" },
   };
 }
 
 function renderContent(content: string) {
   const lines = content.trim().split("\n");
   const elements: React.ReactNode[] = [];
-
   lines.forEach((line, i) => {
     const trimmed = line.trim();
     if (!trimmed) return;
-
     if (trimmed.startsWith("## ")) {
-      elements.push(
-        <h2 key={i} className="mt-10 mb-4 text-2xl font-extrabold text-slate-900">
-          {trimmed.replace("## ", "")}
-        </h2>
-      );
+      elements.push(<h2 key={i} className="mt-10 mb-4 text-2xl font-extrabold text-slate-900">{trimmed.replace("## ", "")}</h2>);
     } else if (trimmed.startsWith("**") && trimmed.endsWith("**")) {
-      elements.push(
-        <p key={i} className="mt-4 mb-1 font-bold text-slate-800">
-          {trimmed.replace(/\*\*/g, "")}
-        </p>
-      );
-    } else if (trimmed.startsWith("**")) {
-      const parts = trimmed.split("**");
-      elements.push(
-        <p key={i} className="mt-4 text-slate-600 leading-relaxed">
-          <strong className="text-slate-800">{parts[1]}</strong>
-          {parts[2]}
-        </p>
-      );
+      elements.push(<p key={i} className="mt-4 mb-1 font-bold text-slate-800">{trimmed.replace(/\*\*/g, "")}</p>);
     } else {
-      elements.push(
-        <p key={i} className="mt-4 text-slate-600 leading-relaxed">
-          {trimmed}
-        </p>
-      );
+      elements.push(<p key={i} className="mt-4 leading-relaxed text-slate-600">{trimmed}</p>);
     }
   });
-
   return elements;
 }
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-  const article = ARTICLES.find((a) => a.slug === params.slug);
-  const content = ARTICLE_CONTENT[params.slug];
-
+export default async function ArticlePage({ params }: Props) {
+  const { slug } = await params;
+  const article = ARTICLES.find((a) => a.slug === slug);
+  const content = ARTICLE_CONTENT[slug];
   if (!article || !content) return notFound();
 
-  const otherArticles = ARTICLES.filter((a) => a.slug !== params.slug).slice(0, 3);
+  const otherArticles = ARTICLES.filter((a) => a.slug !== slug).slice(0, 3);
 
   return (
     <>
       <Header />
       <main>
-        {/* Article */}
         <article className="py-12">
           <div className="container-page">
             <div className="mx-auto max-w-3xl">
-              {/* Back */}
               <Link href="/blog" className="inline-flex items-center gap-1 text-sm font-medium text-brand transition hover:underline">
-                <ArrowLeft className="h-4 w-4" />
-                Semua Artikel
+                <ArrowLeft className="h-4 w-4" />Semua Artikel
               </Link>
 
-              {/* Header */}
               <div className="mt-6">
                 <div className="flex items-center gap-3 text-xs text-slate-400">
                   <span className="rounded-full bg-brand-light px-2.5 py-1 font-semibold text-brand">{article.category}</span>
@@ -104,23 +75,18 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
 
               <hr className="my-8 border-slate-200" />
 
-              {/* Content */}
-              <div className="prose-custom">
-                {renderContent(content)}
-              </div>
+              <div>{renderContent(content)}</div>
 
               {/* CTA */}
               <div className="mt-12 rounded-2xl bg-gradient-to-r from-brand to-indigo-600 p-8 text-center shadow-lg">
-                <h3 className="text-xl font-bold text-white">Butuh Service AC di Batam?</h3>
-                <p className="mx-auto mt-2 max-w-md text-sm text-blue-100">Konsultasi gratis. Teknisi terverifikasi datang ke rumah. Garansi pekerjaan.</p>
+                <h3 className="text-xl font-bold text-white">Butuh Service di Batam?</h3>
+                <p className="mx-auto mt-2 max-w-md text-sm text-blue-100">Konsultasi gratis. Teknisi terverifikasi datang ke rumah.</p>
                 <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                  <a href={getWhatsAppLink("Halo Benerin, saya baca artikel di website. Mau tanya tentang service AC.")} target="_blank" rel="noopener noreferrer"
+                  <a href={getWhatsAppLink("Halo Benerin, saya baca artikel di website. Mau tanya tentang service.")} target="_blank" rel="noopener noreferrer"
                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-green-600 sm:w-auto">
                     <MessageCircle className="h-4 w-4" />Hubungi WhatsApp
                   </a>
-                  <Link href="/booking?category=ac" className="w-full rounded-xl bg-white px-6 py-3 text-sm font-semibold text-brand transition hover:bg-blue-50 sm:w-auto">
-                    Booking Online
-                  </Link>
+                  <Link href="/booking" className="w-full rounded-xl bg-white px-6 py-3 text-sm font-semibold text-brand sm:w-auto">Booking Online</Link>
                 </div>
               </div>
 
