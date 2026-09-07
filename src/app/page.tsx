@@ -1,42 +1,30 @@
 import Link from "next/link";
 import {
-  Snowflake,
-  Tv,
-  Sparkles,
-  Zap,
-  Droplets,
-  ChevronRight,
-  Shield,
-  Clock,
-  BadgeCheck,
-  Banknote,
+  Snowflake, Tv, Sparkles, Zap, Droplets, ChevronRight,
+  Shield, Clock, BadgeCheck, Banknote, Star, ArrowRight,
+  CheckCircle2, MapPin,
 } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import WaFloat from "@/components/wa-float";
 import {
-  SERVICE_CATEGORIES,
-  HOW_IT_WORKS,
-  TRUST_POINTS,
-  AREAS,
-  BRAND,
-  getWhatsAppLink,
-  formatRupiah,
+  SERVICE_CATEGORIES, HOW_IT_WORKS, TRUST_POINTS, AREAS, BRAND,
+  getWhatsAppLink, formatRupiah,
 } from "@/lib/constants";
 
 const iconMap: Record<string, React.ReactNode> = {
-  Snowflake: <Snowflake className="h-7 w-7" />,
-  Tv: <Tv className="h-7 w-7" />,
-  Sparkles: <Sparkles className="h-7 w-7" />,
-  Zap: <Zap className="h-7 w-7" />,
-  Droplets: <Droplets className="h-7 w-7" />,
+  Snowflake: <Snowflake className="h-6 w-6" />,
+  Tv: <Tv className="h-6 w-6" />,
+  Sparkles: <Sparkles className="h-6 w-6" />,
+  Zap: <Zap className="h-6 w-6" />,
+  Droplets: <Droplets className="h-6 w-6" />,
 };
 
 const trustIcons = [
-  <BadgeCheck key="1" className="h-8 w-8 text-brand" />,
-  <Banknote key="2" className="h-8 w-8 text-brand" />,
-  <Shield key="3" className="h-8 w-8 text-brand" />,
-  <Clock key="4" className="h-8 w-8 text-brand" />,
+  <BadgeCheck key="1" className="h-7 w-7" />,
+  <Banknote key="2" className="h-7 w-7" />,
+  <Shield key="3" className="h-7 w-7" />,
+  <Clock key="4" className="h-7 w-7" />,
 ];
 
 export default function HomePage() {
@@ -45,46 +33,95 @@ export default function HomePage() {
       <Header />
       <main>
         {/* HERO */}
-        <section className="bg-gradient-to-b from-brand-light/40 to-white py-16 sm:py-24">
-          <div className="container-page text-center">
-            <h1 className="mx-auto max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl">
+        <section className="bg-hero-gradient relative overflow-hidden py-20 sm:py-28">
+          <div className="absolute inset-0 opacity-30" style={{backgroundImage: "radial-gradient(circle at 20% 50%, rgba(37,99,235,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(99,102,241,0.1) 0%, transparent 50%)"}} />
+          <div className="container-page relative text-center">
+            <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-brand/20 bg-white/80 px-4 py-1.5 text-sm font-medium text-brand shadow-sm backdrop-blur">
+              <Star className="h-4 w-4 fill-brand text-brand" />
+              Platform Jasa Service #1 di Batam
+            </div>
+            <h1 className="mx-auto max-w-4xl text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
               Service Rumah & Kantor di Batam.{" "}
-              <span className="text-brand">Tinggal Panggil, Beres.</span>
+              <span className="text-gradient">Tinggal Panggil, Beres.</span>
             </h1>
-            <p className="mx-auto mt-5 max-w-xl text-lg text-slate-600">
-              Teknisi terverifikasi datang ke lokasi. Harga transparan, tidak ada biaya tersembunyi. Garansi pekerjaan 7 hari.
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
+              Teknisi terverifikasi datang ke lokasi. Harga transparan, tidak ada
+              biaya tersembunyi. Garansi pekerjaan 7 hari.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link href="/booking" className="w-full rounded-xl bg-brand px-8 py-3.5 text-base font-semibold text-white shadow transition hover:bg-brand-dark sm:w-auto">
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Link
+                href="/booking"
+                className="group flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand to-indigo-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-brand/25 transition-all hover:shadow-xl hover:shadow-brand/30 sm:w-auto"
+              >
                 Booking Sekarang
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
-              <a href={getWhatsAppLink("Halo Benerin, saya mau tanya tentang layanan service.")} target="_blank" rel="noopener noreferrer" className="w-full rounded-xl border-2 border-green-600 px-8 py-3.5 text-base font-semibold text-green-700 transition hover:bg-green-50 sm:w-auto">
+              <a
+                href={getWhatsAppLink("Halo Benerin, saya mau tanya tentang layanan service.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full rounded-2xl border-2 border-green-500 bg-white px-8 py-4 text-base font-semibold text-green-700 shadow-sm transition-all hover:bg-green-50 hover:shadow-md sm:w-auto"
+              >
                 Chat WhatsApp
               </a>
+            </div>
+            {/* Stats */}
+            <div className="mx-auto mt-14 grid max-w-lg grid-cols-3 gap-6">
+              {[
+                { value: "500+", label: "Customer" },
+                { value: "50+", label: "Teknisi" },
+                { value: "4.8★", label: "Rating" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <p className="text-2xl font-extrabold text-slate-900 sm:text-3xl">{stat.value}</p>
+                  <p className="mt-1 text-sm text-slate-500">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* LAYANAN */}
-        <section className="py-16">
+        <section className="py-20">
           <div className="container-page">
-            <h2 className="text-center text-2xl font-bold text-slate-900 sm:text-3xl">Layanan Kami</h2>
-            <p className="mx-auto mt-2 max-w-lg text-center text-slate-500">Satu tempat untuk berbagai kebutuhan service rumah dan kantor di Batam.</p>
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="text-center">
+              <p className="text-sm font-bold uppercase tracking-widest text-brand">Layanan Kami</p>
+              <h2 className="mt-3 text-3xl font-extrabold text-slate-900 sm:text-4xl">
+                Satu Tempat untuk Semua Kebutuhan
+              </h2>
+              <p className="mx-auto mt-4 max-w-lg text-slate-500">
+                Dari AC, listrik, plumbing, sampai cleaning — semua bisa dihandle.
+              </p>
+            </div>
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {SERVICE_CATEGORIES.map((svc) => (
-                <Link key={svc.id} href={`/${svc.slug}`} className="group relative flex items-start gap-4 rounded-2xl border border-slate-200 p-5 transition hover:border-brand hover:shadow-md">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-light text-brand">
-                    {iconMap[svc.icon]}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-semibold text-slate-900 group-hover:text-brand">{svc.name}</h3>
-                      {svc.popular && <span className="rounded-full bg-accent/10 px-2 py-0.5 text-xs font-semibold text-accent">Populer</span>}
+                <Link
+                  key={svc.id}
+                  href={`/${svc.slug}`}
+                  className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg hover:shadow-brand/5"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-light to-indigo-100 text-brand transition-colors group-hover:from-brand group-hover:to-indigo-600 group-hover:text-white">
+                      {iconMap[svc.icon]}
                     </div>
-                    <p className="mt-1 text-sm text-slate-500">{svc.tagline}</p>
-                    <p className="mt-2 text-sm font-medium text-brand">Mulai {formatRupiah(svc.startingPrice)}</p>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-bold text-slate-900">{svc.name}</h3>
+                        {svc.popular && (
+                          <span className="rounded-full bg-gradient-to-r from-orange-500 to-amber-500 px-2.5 py-0.5 text-xs font-bold text-white">
+                            Populer
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-1.5 text-sm text-slate-500">{svc.tagline}</p>
+                      <div className="mt-3 flex items-center justify-between">
+                        <p className="text-sm font-bold text-brand">
+                          Mulai {formatRupiah(svc.startingPrice)}
+                        </p>
+                        <ChevronRight className="h-5 w-5 text-slate-300 transition group-hover:translate-x-1 group-hover:text-brand" />
+                      </div>
+                    </div>
                   </div>
-                  <ChevronRight className="mt-1 h-5 w-5 shrink-0 text-slate-300 transition group-hover:text-brand" />
                 </Link>
               ))}
             </div>
@@ -92,31 +129,50 @@ export default function HomePage() {
         </section>
 
         {/* CARA KERJA */}
-        <section className="bg-slate-50 py-16">
+        <section className="bg-slate-50 py-20">
           <div className="container-page">
-            <h2 className="text-center text-2xl font-bold text-slate-900 sm:text-3xl">Cara Kerja</h2>
-            <p className="mx-auto mt-2 max-w-lg text-center text-slate-500">Pesan teknisi dalam hitungan menit, tanpa repot.</p>
-            <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-              {HOW_IT_WORKS.map((item) => (
-                <div key={item.step} className="text-center">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand text-lg font-bold text-white">{item.step}</div>
-                  <h3 className="mt-4 font-semibold text-slate-900">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-500">{item.description}</p>
-                </div>
-              ))}
+            <div className="text-center">
+              <p className="text-sm font-bold uppercase tracking-widest text-brand">Cara Kerja</p>
+              <h2 className="mt-3 text-3xl font-extrabold text-slate-900 sm:text-4xl">
+                Semudah 4 Langkah
+              </h2>
+            </div>
+            <div className="relative mx-auto mt-14 max-w-4xl">
+              <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-brand/20 via-brand/10 to-transparent lg:block" />
+              <div className="grid gap-8 lg:grid-cols-4">
+                {HOW_IT_WORKS.map((item) => (
+                  <div key={item.step} className="text-center">
+                    <div className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-indigo-600 text-xl font-extrabold text-white shadow-lg shadow-brand/20">
+                      {item.step}
+                    </div>
+                    <h3 className="mt-5 text-lg font-bold text-slate-900">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-500">{item.description}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* KENAPA BENERIN */}
-        <section className="py-16">
+        <section className="py-20">
           <div className="container-page">
-            <h2 className="text-center text-2xl font-bold text-slate-900 sm:text-3xl">Kenapa {BRAND.name}?</h2>
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="text-center">
+              <p className="text-sm font-bold uppercase tracking-widest text-brand">Keunggulan</p>
+              <h2 className="mt-3 text-3xl font-extrabold text-slate-900 sm:text-4xl">
+                Kenapa Pilih {BRAND.name}?
+              </h2>
+            </div>
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {TRUST_POINTS.map((point, i) => (
-                <div key={i} className="rounded-2xl border border-slate-200 p-6">
-                  {trustIcons[i]}
-                  <h3 className="mt-4 font-semibold text-slate-900">{point.title}</h3>
+                <div
+                  key={i}
+                  className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-light to-indigo-100 text-brand transition-colors group-hover:from-brand group-hover:to-indigo-600 group-hover:text-white">
+                    {trustIcons[i]}
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold text-slate-900">{point.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-500">{point.description}</p>
                 </div>
               ))}
@@ -125,27 +181,60 @@ export default function HomePage() {
         </section>
 
         {/* AREA */}
-        <section className="bg-slate-50 py-16">
+        <section className="bg-slate-50 py-20">
           <div className="container-page">
-            <h2 className="text-center text-2xl font-bold text-slate-900 sm:text-3xl">Area Layanan</h2>
-            <p className="mx-auto mt-2 max-w-lg text-center text-slate-500">Kami melayani seluruh area di Batam.</p>
-            <div className="mx-auto mt-8 flex max-w-2xl flex-wrap justify-center gap-2">
+            <div className="text-center">
+              <p className="text-sm font-bold uppercase tracking-widest text-brand">Area Layanan</p>
+              <h2 className="mt-3 text-3xl font-extrabold text-slate-900 sm:text-4xl">
+                Seluruh Area Batam
+              </h2>
+              <p className="mx-auto mt-4 max-w-md text-slate-500">
+                Teknisi kami tersebar di seluruh area Batam untuk melayani Anda.
+              </p>
+            </div>
+            <div className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-2.5">
               {AREAS.map((area) => (
-                <span key={area} className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700">{area}</span>
+                <span
+                  key={area}
+                  className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 shadow-sm transition hover:border-brand/30 hover:shadow-md"
+                >
+                  <MapPin className="h-3.5 w-3.5 text-brand" />
+                  {area}
+                </span>
               ))}
             </div>
           </div>
         </section>
 
         {/* CTA */}
-        <section className="py-16">
+        <section className="py-20">
           <div className="container-page">
-            <div className="rounded-3xl bg-brand px-6 py-12 text-center sm:px-12">
-              <h2 className="text-2xl font-bold text-white sm:text-3xl">Punya masalah di rumah atau kantor?</h2>
-              <p className="mx-auto mt-3 max-w-md text-blue-100">Hubungi kami sekarang. Teknisi datang ke lokasi, harga transparan, garansi pekerjaan.</p>
-              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <Link href="/booking" className="w-full rounded-xl bg-white px-8 py-3.5 text-base font-semibold text-brand shadow transition hover:bg-blue-50 sm:w-auto">Booking Sekarang</Link>
-                <a href={getWhatsAppLink("Halo Benerin, saya butuh bantuan.")} target="_blank" rel="noopener noreferrer" className="w-full rounded-xl border-2 border-white/50 px-8 py-3.5 text-base font-semibold text-white transition hover:border-white sm:w-auto">Chat WhatsApp</a>
+            <div className="bg-cta-gradient relative overflow-hidden rounded-3xl px-6 py-16 text-center shadow-2xl shadow-brand/20 sm:px-16">
+              <div className="absolute inset-0 opacity-10" style={{backgroundImage: "radial-gradient(circle at 30% 50%, white 0%, transparent 50%)"}} />
+              <div className="relative">
+                <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+                  Punya Masalah di Rumah?
+                </h2>
+                <p className="mx-auto mt-4 max-w-md text-lg text-blue-100">
+                  Jangan ditunda. Hubungi kami sekarang, teknisi datang hari ini.
+                </p>
+                <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                  <Link
+                    href="/booking"
+                    className="group flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-8 py-4 text-base font-bold text-brand shadow-lg transition-all hover:shadow-xl sm:w-auto"
+                  >
+                    Booking Sekarang
+                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                  <a
+                    href={getWhatsAppLink("Halo Benerin, saya butuh bantuan.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full rounded-2xl border-2 border-white/30 px-8 py-4 text-base font-semibold text-white transition hover:border-white/60 hover:bg-white/10 sm:w-auto"
+                  >
+                    Chat WhatsApp
+                  </a>
+                </div>
               </div>
             </div>
           </div>
